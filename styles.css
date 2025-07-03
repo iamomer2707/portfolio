@@ -259,6 +259,8 @@ section {
 
 .about-text,
 .skills {
+    opacity: 1;
+    transform: translateY(0);
     transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
@@ -332,13 +334,7 @@ section {
     position: relative;
 }
 
-.education-item:nth-child(odd) {
-    flex-direction: row-reverse;
-}
-
-.education-item:nth-child(odd) .education-content {
-    text-align: right;
-}
+/* Remove alternating alignment - keep all items left-aligned */
 
 .education-date {
     flex: 0 0 150px;
@@ -362,18 +358,10 @@ section {
     content: '';
     position: absolute;
     top: 50%;
+    left: -20px;
     width: 0;
     height: 0;
     border: 10px solid transparent;
-}
-
-.education-item:nth-child(odd) .education-content::before {
-    right: -20px;
-    border-left-color: white;
-}
-
-.education-item:nth-child(even) .education-content::before {
-    left: -20px;
     border-right-color: white;
 }
 
@@ -437,13 +425,7 @@ section {
     position: relative;
 }
 
-.experience-item:nth-child(even) {
-    flex-direction: row-reverse;
-}
-
-.experience-item:nth-child(even) .experience-content {
-    text-align: right;
-}
+/* Remove alternating alignment - keep all items left-aligned */
 
 .experience-date {
     flex: 0 0 150px;
@@ -467,19 +449,11 @@ section {
     content: '';
     position: absolute;
     top: 50%;
+    left: -20px;
     width: 0;
     height: 0;
     border: 10px solid transparent;
-}
-
-.experience-item:nth-child(odd) .experience-content::before {
-    left: -20px;
     border-right-color: white;
-}
-
-.experience-item:nth-child(even) .experience-content::before {
-    right: -20px;
-    border-left-color: white;
 }
 
 .experience-content h3 {
@@ -869,13 +843,13 @@ section {
         padding-left: 60px;
     }
 
-    .education-item:nth-child(odd),
-    .experience-item:nth-child(odd) {
+    .education-item,
+    .experience-item {
         flex-direction: column;
     }
 
-    .education-item:nth-child(odd) .education-content,
-    .experience-item:nth-child(odd) .experience-content {
+    .education-content,
+    .experience-content {
         text-align: left;
     }
 

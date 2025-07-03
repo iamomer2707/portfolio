@@ -109,7 +109,7 @@ const observer = new IntersectionObserver((entries) => {
 // Initialize animations when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     // Observe elements for animation
-    const animateElements = document.querySelectorAll('.education-item, .experience-item, .project-card, .skill-category, .about-text, .skills, .section-title, .certification-card');
+    const animateElements = document.querySelectorAll('.education-item, .experience-item, .project-card, .skill-category, .section-title, .certification-card');
     
     animateElements.forEach(el => {
         // Don't hide section titles initially
@@ -121,34 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(el);
     });
     
-    // Special handler for about section
-    const aboutSection = document.getElementById('about');
-    if (aboutSection) {
-        const aboutObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const aboutText = entry.target.querySelector('.about-text');
-                    const skills = entry.target.querySelector('.skills');
-                    
-                    if (aboutText) {
-                        setTimeout(() => {
-                            aboutText.style.opacity = '1';
-                            aboutText.style.transform = 'translateY(0)';
-                        }, 100);
-                    }
-                    
-                    if (skills) {
-                        setTimeout(() => {
-                            skills.style.opacity = '1';
-                            skills.style.transform = 'translateY(0)';
-                        }, 300);
-                    }
-                }
-            });
-        }, { threshold: 0.2 });
-        
-        aboutObserver.observe(aboutSection);
-    }
+
 });
 
 // Contact form handling with notification system
@@ -510,19 +483,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
 console.log('Resume website loaded successfully!');
 
-// Fix about section animation initialization
-function initializeAboutSection() {
-    const aboutText = document.querySelector('.about-text');
-    const skills = document.querySelector('.skills');
-    
-    if (aboutText && skills) {
-        // Ensure elements are visible by default
-        aboutText.style.opacity = '1';
-        aboutText.style.transform = 'translateY(0)';
-        skills.style.opacity = '1';
-        skills.style.transform = 'translateY(0)';
-    }
-}
-
-// Initialize about section immediately
-window.addEventListener('DOMContentLoaded', initializeAboutSection);
+// About section is now handled by CSS and displays properly without JavaScript
