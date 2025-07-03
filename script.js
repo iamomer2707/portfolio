@@ -151,10 +151,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Contact form handling
+// Contact form handling with notification system
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
+    contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         
         // Get form data
@@ -166,23 +166,158 @@ if (contactForm) {
         
         // Basic validation
         if (!name || !email || !subject || !message) {
-            alert('Please fill in all fields.');
+            showNotification('Please fill in all fields.', 'error');
             return;
         }
         
         // Email validation
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-            alert('Please enter a valid email address.');
+            showNotification('Please enter a valid email address.', 'error');
             return;
         }
         
-        // Here you would typically send the form data to a server
-        // For now, we'll just show a success message
-        alert('Thank you for your message! I\'ll get back to you soon.');
-        contactForm.reset();
+        // Show loading state
+        const submitButton = contactForm.querySelector('button[type="submit"]');
+        const originalText = submitButton.textContent;
+        submitButton.textContent = 'Sending...';
+        submitButton.disabled = true;
+        
+        try {
+            // Send notification to owner (you) via multiple channels
+            await sendContactNotification({
+                name,
+                email,
+                subject,
+                message,
+                timestamp: new Date().toISOString()
+            });
+            
+            // Store the contact in localStorage for record keeping
+            storeContactSubmission({
+                name,
+                email,
+                subject,
+                message,
+                timestamp: new Date().toISOString()
+            });
+            
+            showNotification('Thank you for your message! I\'ll get back to you soon.', 'success');
+            contactForm.reset();
+            
+        } catch (error) {
+            console.error('Error sending contact form:', error);
+            showNotification('There was an error sending your message. Please try again or contact me directly.', 'error');
+        } finally {
+            submitButton.textContent = originalText;
+            submitButton.disabled = false;
+        }
     });
 }
+
+// Notification system
+function showNotification(message, type = 'info') {
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.textContent = message;
+    
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 20px;
+        border-radius: 8px;
+        color: white;
+        font-weight: 500;
+        z-index: 10000;
+        max-width: 400px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        transition: all 0.3s ease;
+        ${type === 'success' ? 'background-color: #27ae60;' : ''}
+        ${type === 'error' ? 'background-color: #e74c3c;' : ''}
+        ${type === 'info' ? 'background-color: #3498db;' : ''}
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Animate in
+    setTimeout(() => notification.style.transform = 'translateX(0)', 10);
+    
+    // Auto remove after 5 seconds
+    setTimeout(() => {
+        notification.style.opacity = '0';
+        notification.style.transform = 'translateX(100%)';
+        setTimeout(() => document.body.removeChild(notification), 300);
+    }, 5000);
+}
+
+// Send contact notification via multiple channels
+async function sendContactNotification(contactData) {
+    // Method 1: Browser notification (if permission granted)
+    if ('Notification' in window && Notification.permission === 'granted') {
+        new Notification('New Contact Form Submission', {
+            body: `From: ${contactData.name} (${contactData.email})\nSubject: ${contactData.subject}`,
+            icon: '/favicon.ico'
+        });
+    }
+    
+    // Method 2: Email via mailto (opens user's email client)
+    const emailBody = `
+New contact form submission from your portfolio website:
+
+Name: ${contactData.name}
+Email: ${contactData.email}
+Subject: ${contactData.subject}
+Message: ${contactData.message}
+Timestamp: ${contactData.timestamp}
+    `.trim();
+    
+    // Create a hidden mailto link and click it
+    const mailtoLink = document.createElement('a');
+    mailtoLink.href = `mailto:iamomer2707@gmail.com?subject=Portfolio Contact: ${contactData.subject}&body=${encodeURIComponent(emailBody)}`;
+    mailtoLink.style.display = 'none';
+    document.body.appendChild(mailtoLink);
+    mailtoLink.click();
+    document.body.removeChild(mailtoLink);
+    
+    // Method 3: Console logging for development
+    console.log('New contact form submission:', contactData);
+    
+    // Method 4: Local storage backup
+    const submissions = JSON.parse(localStorage.getItem('contactSubmissions') || '[]');
+    submissions.push(contactData);
+    localStorage.setItem('contactSubmissions', JSON.stringify(submissions));
+    
+    return Promise.resolve();
+}
+
+// Store contact submission for record keeping
+function storeContactSubmission(contactData) {
+    const submissions = JSON.parse(localStorage.getItem('contactSubmissions') || '[]');
+    submissions.push(contactData);
+    localStorage.setItem('contactSubmissions', JSON.stringify(submissions));
+    
+    // Update submission counter
+    const count = submissions.length;
+    localStorage.setItem('totalSubmissions', count.toString());
+}
+
+// Request notification permission on page load
+window.addEventListener('load', () => {
+    if ('Notification' in window && Notification.permission === 'default') {
+        Notification.requestPermission();
+    }
+});
+
+// Admin function to view all contact submissions (for development)
+function viewContactSubmissions() {
+    const submissions = JSON.parse(localStorage.getItem('contactSubmissions') || '[]');
+    console.table(submissions);
+    return submissions;
+}
+
+// Make viewContactSubmissions available globally for admin use
+window.viewContactSubmissions = viewContactSubmissions;
 
 // Typing effect for hero title
 function typeWriter(element, text, speed = 100) {
@@ -371,44 +506,23 @@ document.addEventListener('DOMContentLoaded', () => {
     images.forEach(img => imageObserver.observe(img));
 });
 
-// Add loading state to form submission
-if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-        const submitButton = contactForm.querySelector('button[type="submit"]');
-        const originalText = submitButton.textContent;
-        
-        submitButton.textContent = 'Sending...';
-        submitButton.disabled = true;
-        
-        // Simulate form submission delay
-        setTimeout(() => {
-            submitButton.textContent = originalText;
-            submitButton.disabled = false;
-        }, 2000);
-    });
-}
+
 
 console.log('Resume website loaded successfully!');
 
-// Debug function for about section
-function debugAboutSection() {
-    const aboutSection = document.getElementById('about');
+// Fix about section animation initialization
+function initializeAboutSection() {
     const aboutText = document.querySelector('.about-text');
     const skills = document.querySelector('.skills');
     
-    console.log('About section:', aboutSection);
-    console.log('About text:', aboutText, aboutText ? aboutText.style.opacity : 'not found');
-    console.log('Skills:', skills, skills ? skills.style.opacity : 'not found');
-    
-    if (aboutText) {
-        console.log('About text computed style:', window.getComputedStyle(aboutText).opacity);
-    }
-    if (skills) {
-        console.log('Skills computed style:', window.getComputedStyle(skills).opacity);
+    if (aboutText && skills) {
+        // Ensure elements are visible by default
+        aboutText.style.opacity = '1';
+        aboutText.style.transform = 'translateY(0)';
+        skills.style.opacity = '1';
+        skills.style.transform = 'translateY(0)';
     }
 }
 
-// Call debug function after page load
-window.addEventListener('load', () => {
-    setTimeout(debugAboutSection, 1000);
-});
+// Initialize about section immediately
+window.addEventListener('DOMContentLoaded', initializeAboutSection);

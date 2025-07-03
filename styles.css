@@ -437,11 +437,11 @@ section {
     position: relative;
 }
 
-.experience-item:nth-child(odd) {
+.experience-item:nth-child(even) {
     flex-direction: row-reverse;
 }
 
-.experience-item:nth-child(odd) .experience-content {
+.experience-item:nth-child(even) .experience-content {
     text-align: right;
 }
 
@@ -473,13 +473,13 @@ section {
 }
 
 .experience-item:nth-child(odd) .experience-content::before {
-    right: -20px;
-    border-left-color: white;
+    left: -20px;
+    border-right-color: white;
 }
 
 .experience-item:nth-child(even) .experience-content::before {
-    left: -20px;
-    border-right-color: white;
+    right: -20px;
+    border-left-color: white;
 }
 
 .experience-content h3 {
