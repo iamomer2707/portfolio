@@ -1,0 +1,52 @@
+Syed Omer Hussain
+Hyderabad, India
++91 8790648148
+iamomer2707@gmail.com
+Dedicated IT Enthusiast with a flexible and motivated approach, equipped with strong technical skills and a solid
+foundation in computer science. Driven by a commitment to delivering high-caliber results and attention to detail. A strong
+collaborator and effective communicator, focused on achieving goals and continually improving. Prepared to contribute
+meaningfully to the success of your university while enhancing personal and professional growth.
+EDUCATION
+DECCAN COLLEGE OF ENGINEERING AND TECHNOLOGY
+Bachelor’s (Information Technology)
+Cumulative Grade Point Average (CGPA): 7.4 (Seven point four)
+Hyderabad, India
+2025
+MS JUNIOR COLLEGE Hyderabad, India
+Intermediate 2021
+Total Marks: 902 (Nine zero two)
+MS CREATIVE SCHOOL Hyderabad, India
+Secondary School Certificate (SSC) 2019
+Cumulative Grade Point Average (CGPA): 9.2 (Nine point two)
+PROJECTS
+Speech Enhancement using Residual CNN
+This project focuses on improving the quality and intelligibility of speech signals by effectively suppressing noise and
+distortions. Residual connections facilitate the learning of deeper network architectures, ensuring efficient feature extraction
+and reconstruction of clean speech while preserving original signal characteristics.
+Static Keystroke Dynamic Authentication (SKDA) Model
+This project focuses on enhancing user authentication through static keystroke dynamics by incorporating non-conventional
+features such as NumLock, Shift, and CapsLock keys. The aim is to capture and model these alternative inputs to improve
+identity verification accuracy.
+EXPERIENCE
+DATAPOINT IT & HARDWARE PVT. LTD Hyderabad, India
+Python Intern 2024
+Successfully completed a 1-month internship from January to February 2024, during which I developed a robust Credit Card
+Fraud Detection System using Python and advanced machine learning algorithms. This project focused on accurately
+identifying fraudulent transactions, showcasing my ability to apply technical skills to solve real-world financial challenges. I
+also received a certificate in recognition of my contributions.
+PANTECH E LEARNING PVT. LTD Hyderabad, India
+Web Development Intern 2024
+Successfully completed a 1-month internship from May to June 2024, during which I developed an Online Crime Reporting
+System using Java. This project focused on communication and reporting of crime to nearby police station. I also received a
+certificate in recognition of my contributions.
+CERTIFICATIONS
+MODEL MAKING |National Digital Library of India (NDLI) Club
+Our team of three successfully built a working model of a 2-bit binary adder. We showcased it at our college tech-fest held
+by NDLI Club and were awarded a participation certificate.
+CS50P |HarvardX
+certification
+Completed CS50P a course offered by HarvardX on Introduction to Python Programming successfully and received
+ADDITIONAL SKILLS
+• Expertise: Teamwork, Technical Analysis, Problem Solving, Inquisitive, Time Management
+• Technical Skills: C, C++, HTML/CSS, Python/Django, JAVA, MySQL
+• Hobbies & Interests: Reading, Fitness, Trekking, Coding, Gaming

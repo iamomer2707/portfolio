@@ -101,16 +101,54 @@ const observer = new IntersectionObserver((entries) => {
         if (entry.isIntersecting) {
             entry.target.style.opacity = '1';
             entry.target.style.transform = 'translateY(0)';
+            entry.target.classList.add('animate-in');
         }
     });
 }, observerOptions);
 
-// Observe elements for animation
-document.querySelectorAll('.education-item, .experience-item, .project-card, .skill-category, .about-text, .skills').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(el);
+// Initialize animations when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    // Observe elements for animation
+    const animateElements = document.querySelectorAll('.education-item, .experience-item, .project-card, .skill-category, .about-text, .skills, .section-title');
+    
+    animateElements.forEach(el => {
+        // Don't hide section titles initially
+        if (!el.classList.contains('section-title')) {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+        }
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+    });
+    
+    // Special handler for about section
+    const aboutSection = document.getElementById('about');
+    if (aboutSection) {
+        const aboutObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const aboutText = entry.target.querySelector('.about-text');
+                    const skills = entry.target.querySelector('.skills');
+                    
+                    if (aboutText) {
+                        setTimeout(() => {
+                            aboutText.style.opacity = '1';
+                            aboutText.style.transform = 'translateY(0)';
+                        }, 100);
+                    }
+                    
+                    if (skills) {
+                        setTimeout(() => {
+                            skills.style.opacity = '1';
+                            skills.style.transform = 'translateY(0)';
+                        }, 300);
+                    }
+                }
+            });
+        }, { threshold: 0.2 });
+        
+        aboutObserver.observe(aboutSection);
+    }
 });
 
 // Contact form handling
@@ -351,3 +389,26 @@ if (contactForm) {
 }
 
 console.log('Resume website loaded successfully!');
+
+// Debug function for about section
+function debugAboutSection() {
+    const aboutSection = document.getElementById('about');
+    const aboutText = document.querySelector('.about-text');
+    const skills = document.querySelector('.skills');
+    
+    console.log('About section:', aboutSection);
+    console.log('About text:', aboutText, aboutText ? aboutText.style.opacity : 'not found');
+    console.log('Skills:', skills, skills ? skills.style.opacity : 'not found');
+    
+    if (aboutText) {
+        console.log('About text computed style:', window.getComputedStyle(aboutText).opacity);
+    }
+    if (skills) {
+        console.log('Skills computed style:', window.getComputedStyle(skills).opacity);
+    }
+}
+
+// Call debug function after page load
+window.addEventListener('load', () => {
+    setTimeout(debugAboutSection, 1000);
+});
