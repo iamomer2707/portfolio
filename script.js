@@ -33,20 +33,22 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Navbar background change on scroll
-window.addEventListener('scroll', () => {
+// Combined scroll handler for better performance
+let scrollTicking = false;
+function handleScroll() {
+    const scrollY = window.pageYOffset;
+    
+    // Navbar background change
     const navbar = document.getElementById('navbar');
-    if (window.scrollY > 50) {
+    if (scrollY > 50) {
         navbar.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
         navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
     } else {
         navbar.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
         navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
     }
-});
-
-// Active navigation link highlighting
-window.addEventListener('scroll', () => {
+    
+    // Active navigation link highlighting
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-link');
     
@@ -54,7 +56,7 @@ window.addEventListener('scroll', () => {
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.clientHeight;
-        if (window.pageYOffset >= sectionTop - 200) {
+        if (scrollY >= sectionTop - 200) {
             current = section.getAttribute('id');
         }
     });
@@ -65,6 +67,27 @@ window.addEventListener('scroll', () => {
             link.classList.add('active');
         }
     });
+    
+    // Back to top button visibility
+    const backToTopButton = document.querySelector('.back-to-top');
+    if (backToTopButton) {
+        if (scrollY > 300) {
+            backToTopButton.style.opacity = '1';
+            backToTopButton.style.visibility = 'visible';
+        } else {
+            backToTopButton.style.opacity = '0';
+            backToTopButton.style.visibility = 'hidden';
+        }
+    }
+    
+    scrollTicking = false;
+}
+
+window.addEventListener('scroll', () => {
+    if (!scrollTicking) {
+        requestAnimationFrame(handleScroll);
+        scrollTicking = true;
+    }
 });
 
 // Intersection Observer for animations
@@ -83,7 +106,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe elements for animation
-document.querySelectorAll('.education-item, .experience-item, .project-card, .skill-category').forEach(el => {
+document.querySelectorAll('.education-item, .experience-item, .project-card, .skill-category, .about-text, .skills').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
@@ -148,12 +171,21 @@ window.addEventListener('load', () => {
     }
 });
 
-// Parallax effect for hero section
-window.addEventListener('scroll', () => {
+// Parallax effect for hero section (optimized)
+let ticking = false;
+function updateParallax() {
     const scrolled = window.pageYOffset;
     const hero = document.querySelector('.hero');
-    if (hero) {
-        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+    if (hero && scrolled < window.innerHeight) {
+        hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+    }
+    ticking = false;
+}
+
+window.addEventListener('scroll', () => {
+    if (!ticking) {
+        requestAnimationFrame(updateParallax);
+        ticking = true;
     }
 });
 
@@ -229,15 +261,7 @@ backToTopButton.style.cssText = `
 
 document.body.appendChild(backToTopButton);
 
-window.addEventListener('scroll', () => {
-    if (window.pageYOffset > 300) {
-        backToTopButton.style.opacity = '1';
-        backToTopButton.style.visibility = 'visible';
-    } else {
-        backToTopButton.style.opacity = '0';
-        backToTopButton.style.visibility = 'hidden';
-    }
-});
+
 
 backToTopButton.addEventListener('click', () => {
     window.scrollTo({

@@ -7,6 +7,7 @@
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 70px;
 }
 
 body {
@@ -253,6 +254,14 @@ section {
 /* About Section */
 .about {
     background-color: #f8f9fa;
+    overflow: hidden;
+}
+
+.about-text,
+.skills {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .about-content {
