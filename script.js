@@ -109,7 +109,7 @@ const observer = new IntersectionObserver((entries) => {
 // Initialize animations when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     // Observe elements for animation
-    const animateElements = document.querySelectorAll('.education-item, .experience-item, .project-card, .skill-category, .about-text, .skills, .section-title');
+    const animateElements = document.querySelectorAll('.education-item, .experience-item, .project-card, .skill-category, .about-text, .skills, .section-title, .certification-card');
     
     animateElements.forEach(el => {
         // Don't hide section titles initially

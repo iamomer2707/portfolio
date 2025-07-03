@@ -1,8 +1,8 @@
-# Portfolio Website - John Doe
+# Portfolio Website - Syed Omer Hussain
 
 ## Overview
 
-This is a personal portfolio website for John Doe, a Full Stack Software Developer. The project is built as a static website using vanilla HTML, CSS, and JavaScript, designed to showcase professional experience, education, projects, and contact information in a clean, modern interface.
+This is a personal portfolio website for Syed Omer Hussain, an IT Enthusiast and Graduate Student. The project is built as a static website using vanilla HTML, CSS, and JavaScript, designed to showcase educational background, internship experience, research projects, certifications, and contact information in a clean, modern interface.
 
 ## System Architecture
 
@@ -30,12 +30,13 @@ This is a personal portfolio website for John Doe, a Full Stack Software Develop
 - **Active Link Highlighting**: Visual indication of current section
 
 ### 2. Content Sections
-- **Hero Section**: Introduction and main call-to-action
-- **About**: Personal information and professional summary
-- **Education**: Academic background
-- **Experience**: Professional work history
-- **Projects**: Portfolio of completed work
-- **Contact**: Contact information and forms
+- **Hero Section**: Introduction and main call-to-action with Syed's actual information
+- **About**: Personal information highlighting IT expertise and academic pursuits
+- **Education**: Academic background (MS at IIT Chicago, BE from Deccan College)
+- **Experience**: Internship experiences at Datapoint IT and Pantech E Learning
+- **Projects**: Portfolio of research and academic projects (ML, authentication, crime reporting)
+- **Certifications**: Academic certifications and competition achievements
+- **Contact**: Contact information with actual details
 
 ### 3. Interactive Features
 - **Responsive Design**: Optimized for all screen sizes
@@ -93,7 +94,10 @@ This is a personal portfolio website for John Doe, a Full Stack Software Develop
 
 ```
 Changelog:
-- July 03, 2025. Initial setup
+- July 03, 2025. Initial setup with John Doe template
+- July 03, 2025. Complete customization for Syed Omer Hussain with authentic resume data
+- July 03, 2025. Added certifications section and fixed scrolling performance issues
+- July 03, 2025. Updated all content sections with actual information from provided resumes
 ```
 
 ## User Preferences
