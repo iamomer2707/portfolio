@@ -238,6 +238,9 @@ section {
     margin-bottom: 3rem;
     color: #2c3e50;
     position: relative;
+    opacity: 1;
+    transform: translateY(0);
+    transition: none;
 }
 
 .section-title::after {

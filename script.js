@@ -109,14 +109,11 @@ const observer = new IntersectionObserver((entries) => {
 // Initialize animations when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     // Observe elements for animation
-    const animateElements = document.querySelectorAll('.education-item, .experience-item, .project-card, .skill-category, .section-title, .certification-card');
+    const animateElements = document.querySelectorAll('.education-item, .experience-item, .project-card, .skill-category, .certification-card');
     
     animateElements.forEach(el => {
-        // Don't hide section titles initially
-        if (!el.classList.contains('section-title')) {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-        }
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
         el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(el);
     });
