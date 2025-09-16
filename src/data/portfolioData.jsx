@@ -6,7 +6,7 @@ export const portfolioData = {
     email: "iamomer2707@gmail.com",
     phone: "+1 312-437-1669",
     location: "Chicago, IL",
-    resumeUrl: "/assets/resume.pdf",
+    resumeUrl: "/assets/Resume.pdf",
     socialLinks: {
       linkedin: "https://www.linkedin.com/in/iamomer2707/",
       github: "https://github.com/iamomer2707",
